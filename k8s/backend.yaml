@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_eca03d05d7c1 #컨테이너 이미지 경로 이곳 수정
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b39c013fc3a8:latest #컨테이너 이미지 경로 이곳 수정
           imagePullPolicy: Always
           resources:
             requests:
