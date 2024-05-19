@@ -6,8 +6,13 @@
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 		<div class="mb-3">
-			<input class="form-control form-control-lg" type="text" placeholder="질문 제목을 입력해 주세요" id="inputLarge" th:field="*{subject}">
+			<!--<label class="col-form-label col-form-label-lg mt-4" for="inputLarge"></label>-->
+			<!--<input class="form-control form-control-lg" type="text" placeholder="질문 제목을 입력해 주세요" id="inputLarge" th:field="*{subject}">-->
+			<input class="form-control" type="text" placeholder="질문 제목을 입력해 주세요" id="inputLarge" th:field="*{subject}">
+
 		</div>
+
+
 		<div class="mb-3">
 			<!--<label for="content" class="form-label">내용</label>-->
 			<textarea id="editor" th:field="*{content}" class="form-control" rows="10" ck-editor></textarea>
@@ -19,3 +24,5 @@
 </div>
 
 </html>
+
+
