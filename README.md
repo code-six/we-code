@@ -151,4 +151,20 @@
 
 
 ## 5. 상세 화면
--
+<strong>[/post/list]</strong><br>
+![메인화면_코드 목록](https://github.com/code-six/we-code/assets/165545220/3e6fceba-c38f-431a-8c00-67e5326506fd)
+
+<strong>[/post/create]</strong><br>
+![코드 등록 화면](https://github.com/code-six/we-code/assets/165545220/877320f0-d19b-44f8-a2bd-c32b91a2be46)
+
+<strong>[/question/create]</strong><br>
+![질문 등록 화면](https://github.com/code-six/we-code/assets/165545220/ebae0661-b3f7-453a-9c78-fd60e8683b89)
+
+<strong>[/question/list]</strong><br>
+![질문 상세 화면](https://github.com/code-six/we-code/assets/165545220/c69962cc-899a-4212-a78e-4aa0cd39a73d)
+
+<strong>[/user/mypage]</strong><br>
+![회원 정보 수정](https://github.com/code-six/we-code/assets/165545220/378c6589-e6c0-4b64-a6e3-551c3a998320)
+
+<strong>[/user/signup]</strong><br>
+![회원가입](https://github.com/code-six/we-code/assets/165545220/acbeee8c-9561-494f-a2d7-3e8df477d4d4)
