@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container mt-5 mb-5" layout:fragment="content" style="box-sizing: border-box;">
+    <div class="container mb-2" style="overflow-x: hidden; overflow-y:hidden;">
+        <h3 class="d-flex justify-content-center align-items-center mt-5 mb-5" style="overflow-x: hidden; overflow-y:hidden;color:black;">회원 정보 수정</h3>
+    <div class="d-flex justify-content-between align-content-center" style="padding-left: 120px; padding-right:120px; margin-top: 15px; gap: 20px;">
+        <div class="col-md-3 text-center mb-3" style="margin-top: 15px;"> <!-- 프로필 이미지 -->
+            <form action="/user/mypage/uploadProfile" enctype="multipart/form-data" id="profileImageForm" method="POST">
+                <label for="profileImageInput" style="cursor: pointer;">
+                    <img alt="프로필 이미지" class="img-fluid rounded-circle mb-3"
+                         onerror="this.src='https://placehold.co/150x150?text=click';"
+                         style="width: 150px; height: 150px;"
+                         th:src="@{${user.profileImage}}">
+                </label>
+                <input id="profileImageInput" name="file"
+                       onchange="document.getElementById('profileImageForm').submit();" style="display: none;"
+                       type="file"/>
+                <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div class="d-flex align-items-center mb-3 border-bottom">
+                <!-- 닉네임 변경 안내 -->
+                <div class="row" style="padding-left: 20px;">
+                    <label for="nicknameDisplay" class="col-sm-5 col-form-label">닉네임</label>
+                    <div class="col-sm-7">
+                        <input type="text" readonly="" class="form-control-plaintext" id="nicknameDisplay" th:value="${user.username}">
+                    </div>
+                </div>
+
+                <a href="#" id="editNicknameBtn">Edit</a>
+                <form id="nicknameEditForm" method="post" style="display: none; margin-left: 80px;"
+                      th:action="@{/user/mypage/updateNickname}">
+                    <div class="form-group mb-1">
+                        <div class="input-group">
+                            <label for="nickname" class="form-label mt-4"></label>
+                            <input type="text" class="form-control inp-form-control" id="nickname" name="nickname" aria-describedby="nicknameHelp addonBtn1" placeholder="새로운 닉네임" required th:value="${user.username}">
+                            <button class="btn btn-primary custom-btn" type="submit">저장</button>
+                            <button class="btn btn-secondary custom-btn-2" style="border-radius: 0;" id="cancelNicknameBtn" type="button">취소</button>
+                        </div>
+                        <small id="nicknameHelp" class="form-text text-muted">6자 이상 15자 이하의 영문과 숫자를 조합해 주세요.</small>
+                        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    </div>
+
+                </form>
+            </div>
+            <div class="d-flex align-items-center mb-3 border-bottom">
+                <!-- 이메일 변경 안내 -->
+                <div class="row" style="padding-left: 20px;">
+                    <label for="emailDisplay" class="col-sm-5 col-form-label">이메일</label>
+                    <div class="col-sm-7">
+                        <input type="text" readonly="" class="form-control-plaintext" id="emailDisplay" th:value="${user.email}">
+                    </div>
+                </div>
+
+                <a href="#" id="editEmailBtn">Edit</a>
+                <form id="emailEditForm" method="post" style="display: none; margin-left: 80px;" th:action="@{/user/mypage/updateEmail}">
+                    <div class="form-group mb-1">
+                        <div class="input-group">
+                            <label for="email" class="form-label mt-4"></label>
+                            <input type="email" class="form-control inp-form-control" id="email" name="email" aria-describedby="emailHelp addonBtn1" placeholder="새로운 이메일" required th:value="${user.email}">
+                            <button class="btn btn-primary custom-btn" type="submit">저장</button>
+                            <button class="btn btn-secondary custom-btn-2" style="border-radius: 0;" id="cancelEmailBtn" type="button">취소</button>
+                        </div>
+                        <small id="emailHelp" class="form-text text-muted">이메일 형식에 알맞은 주소를 입력해 주세요.</small>
+                        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    </div>
+
+                </form>
+            </div>
+            <div class="d-flex align-items-center mb-3 border-bottom">
+                <span class="mb-2" style="padding-left: 20px;">비밀번호</span>
+                <!-- 비밀번호 변경 안내 -->
+                <a href="#" id="changePasswordBtn" class="mb-2" style="margin-left: 185px;">Edit</a>
+                <form id="passwordChangeForm" method="post" style="display: none; margin-left: 80px;"
+                      th:action="@{/user/mypage/updatePassword}">
+                    <div class="form-floating mb-2">
+                        <input required type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Password" autocomplete="off" aria-describedby="pwHelp2">
+                        <label for="currentPassword">현재 비밀번호</label>
+                    </div>
+
+
+                    <div class="form-floating mb-1">
+                        <input required type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" autocomplete="off" aria-describedby="pwHelp">
+                        <label for="currentPassword">새 비밀번호</label>
+                        <small id="pwHelp" class="form-text text-muted">10자 이상의 영문자, 숫자, 특수 문자를 조합해 주세요.</small>
+                    </div>
+
+
+                    <div class="form-floating mb-1">
+                        <input required type="password" class="form-control" id="newPasswordConfirm" name="newPasswordConfirm" placeholder="Password" autocomplete="off" aria-describedby="pwHelp2">
+                        <label for="currentPassword">새 비밀번호 확인</label>
+                        <small id="pwHelp2" class="form-text text-muted">새로운 비밀번호를 한번 더 입력해 주세요.</small>
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-end">
+                        <button class="btn btn-primary custom-btn" type="submit">비밀번호 변경</button>
+                        <button class="btn btn-secondary custom-btn-2" style="border-radius: 0;"
+                                onclick="document.getElementById('passwordChangeForm').style.display='none';"
+                                type="button">취소
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs mt-2"> <!--내 게시글, 내 댓글 탭-->
+            <li class="nav-item">
+                <a class="nav-link custom-nav-link active" data-toggle="tab" href="#postsTab">내 게시글</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link custom-nav-link" data-toggle="tab" href="#commentsTab">내 댓글</a>
+            </li>
+        </ul>
+
+        <div class="tab-content"> <!--내 개시글, 내 댓글 컨텐츠-->
+            <div class="tab-pane fade show active" id="postsTab">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="post : ${posts}">
+                        <a th:href="@{/post/detail/{id}(id=${post.id})}" th:text="'[게시글] : ' + ${post.subject}">게시글
+                            제목</a>
+                        <span th:text="${#temporals.format(post.createDate, 'yyyy-MM-dd HH:mm')}">날짜</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="commentsTab">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="comment : ${comments}">
+                        <div class="content-flex">
+                            <a th:href="@{/post/detail/{id}(id=${comment.post.id})}"
+                               th:text="'[게시글] : ' + ${comment.post.subject}" class="flex-item">게시글 제목</a>
+                            <span th:text="'[댓글] : ' + ${comment.content}" class="flex-item com-span">댓글 내용</span>
+                            <span th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}" class="date-span flex-item">날짜</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="updateModal" role="dialog" tabindex="-1"> <!--모달 창-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">알림</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="updateMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">닫기</button>
+                </div>
+            </div>®
+        </div>
+    </div>
+</div>
+</body>
+</html>

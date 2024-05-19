@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+	<div class="row justify-content-center">
+		<div style="width:38%"><!--class="col-lg-5 col-md-7"-->
+			<div style="height: 50px;"></div>
+			<!--<img src="/icons/we-code.png" alt="We Code Logo" style="width:200px" class="mx-auto d-block">-->
+			<h2 class="text-center">회원가입</h2>
+			<div style="height: 40px;"></div>
+			<div class="my-3 border-bottom mx-auto">
+				<h5>더 나은 코드 작성을 위해 '공유' 하려면 가입하세요.</h5>
+			</div>
+			<div style="height: 20px;"></div>
+			<!--폼 데이터를 전송할 URL 지정, 폼을 채울 때 서버 측에서 제공되는 객체 지정-->
+			<form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post" novalidate style="width:85%; display: block; margin-left: auto; margin-right: auto;">
+				<!--다른 타임리프 템플릿을 삽입 (에러 메시지 표시)-->
+				<!--<div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
+				<div class="mb-4">
+					<!--어떤 데이터를 받아야 하는지 안내하는 라벨 표시-->
+					<!--라벨이 username 필드를 가리키고 있다-->
+					<label for="username" class="form-label">사용자 ID</label>
+					<!--userCreateForm 객체의 username 필드와 입력 필드를 연결-->
+					<!--<input type="text" th:field="*{username}" class="form-control">-->
+					<input type="text" th:field="*{username}" class="form-control" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'">
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+					<div class="form-text" th:if="${!#fields.hasErrors('username')}">6자 이상 15자 이하의 영문과 숫자 조합으로 입력해 주세요.</div>
+					<!--원래<div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">사용자 ID가 이미 사용 중입니다. 다른 ID를 시도해 보세요.</div>-->
+				</div>
+				<div class="mb-4">
+					<!--라벨이 password1 입력 필드를 가리키고 있다-->
+					<label for="password1" class="form-label">비밀번호</label>
+					<!--userCreateForm 객체의 password1 필드와 연결-->
+					<!--입력 내용을 비밀번호 형태로 가린다-->
+					<input type="password" th:field="*{password1}" class="form-control" th:classappend="${#fields.hasErrors('password1')} ? 'is-invalid'">
+					<!--<div class="form-text" th:if="${!#fields.hasErrors('password1')}"></div>-->
+					<!--원래<div class="invalid-feedback" th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}"></div>-->
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}"></div>
+					<div class="form-text" th:if="${!#fields.hasErrors('password1')}">10자 이상의 영문, 숫자, 특수 문자 조합으로 입력해주세요.</div>
+				</div>
+				<div class="mb-4">
+					<!--비밀번호 확인을 위한 입력 필드-->
+					<label for="password2" class="form-label">비밀번호 확인</label>
+					<input type="password" th:field="*{password2}" class="form-control" th:classappend="${#fields.hasErrors('password2')} ? 'is-invalid'">
+					<!--원래 <div class="form-text" th:if="${!#fields.hasErrors('password2')}"></div>
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}"></div>-->
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}"></div>
+					<div class="form-text" th:if="${!#fields.hasErrors('password2')}">비밀번호를 한 번 더 입력해주세요.</div>
+				</div>
+				<div class="mb-4">
+					<!--입력 내용이 이메일 형식인지 검증-->
+					<label for="email" class="form-label">이메일</label>
+					<!--userCreateForm 객체의 email 필드와 연결-->
+					<input type="email" th:field="*{email}" class="form-control" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+					<!-- 에러가 없을 때만 이메일 입력 가이드를 보여줍니다. -->
+					<!--원래<div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">올바른 형식의 이메일 주소를 입력해 주세요.</div>-->
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+					<div class="form-text" th:if="${!#fields.hasErrors('email')}">이메일 형식에 알맞게 입력해주세요.</div>
+				</div>
+				<div style="height: 20px;"></div>
+				<!--폼을 제출할 수 있는 버튼-->
+				<button type="submit" class="btn btn-primary" style="width:100%; border-radius: 10px; display: block; margin-left: auto; margin-right: auto;">회원가입</button>
+			</form>
+			<div style="height: 45px;"></div>
+		</div>
+	</div>
+</div>
+
+</html>

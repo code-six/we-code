@@ -1,0 +1,10 @@
+namespace: krampoline
+resources:
+  - backend.yaml
+  - nginx.yaml
+  - pv.yaml
+  - pvc.yaml
+configMapGenerator:
+  - name: nginx
+    files:
+      - configs/default.conf

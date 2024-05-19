@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+	<div class="row justify-content-center">
+		<div style="width:40%">
+			<div style="height: 50px;"></div>
+			<!--<img src="/icons/we-code.png" alt="We Code Logo" style="width:200px" class="mx-auto d-block">-->
+			<h2 class="text-center">로그인</h2>
+			<div style="height: 40px;"></div>
+			<div class="my-3 border-bottom mx-auto">
+				<h5>더 나은 코드 작성을 위해 '공유' 하려면 로그인하세요.</h5>
+			</div>
+			<div style="height: 20px;"></div>
+			<form th:action="@{/user/login}" method="post" style="width:83%; display: block; margin-left: auto; margin-right: auto;">
+				<div th:if="${param.error}">
+					<div class="alert alert-dismissible alert-danger">
+						<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+						사용자 ID 또는 비밀번호를 확인해 주세요.
+					</div>
+				</div>
+				<div class="mb-4">
+					<label for="username" class="form-label">사용자 ID</label>
+					<input type="text" name="username" id="username" class="form-control">
+				</div>
+				<div class="mb-4">
+					<label for="password" class="form-label">비밀번호</label>
+					<input type="password" name="password" id="password" class="form-control">
+				</div>
+				<div style="height: 20px;"></div>
+				<button type="submit" class="btn btn-primary" style="width:100%; border-radius: 10px; display: block; margin-left: auto; margin-right: auto;">로그인</button>
+			</form>
+			<div style="height: 45px;"></div>
+		</div>
+	</div>
+</div>
+
+</html>

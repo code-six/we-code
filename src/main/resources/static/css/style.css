@@ -1,0 +1,556 @@
+textarea {
+	width: 100%;
+}
+
+input[type=submit] {
+	margin-top: 10px;
+}
+
+/* Google Fonts: Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* 전체 문서에 폰트 적용 */
+body, h1, h2, h3, h4, h5, h6, p, div, span, a, li, table {
+	font-family: 'Roboto', sans-serif !important;
+}
+
+.container {
+	background-color: #fff; /* 컨테이너 배경색 */
+	padding: 20px; /* 패딩 조정 */
+	border-radius: 8px; /* 모서리 둥글게 */
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 그림자 추가 */
+	margin-top: 20px; /* 상단 여백 추가 */
+}
+
+.profile-pic {
+	width: 150px; height: 150px;
+	background-color: #f8f9fa;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.edit-btn {
+	text-decoration: none;
+	font-weight: bold;
+	color: #007bff;
+}
+
+.card {
+	margin-top: 20px;
+}
+
+/* 코드 리스트 */
+
+.custom-btn {
+	background-color: #00306b;
+	color: white;
+}
+
+.custom-btn:hover {
+	background-color: #aacafc;
+	color:white;
+}
+
+.custom-btn-2 {
+	background-color: white;
+	border-radius: 8px;
+	color: black;
+}
+
+.custom-btn-2:hover {
+	background-color: #c3d9fd;
+	color:white;
+}
+
+
+/* 이미지에 마우스를 올렸을 때 살짝 떠오르는 효과 */
+.hover-effect {
+	transition: transform 0.3s ease;
+}
+
+.hover-effect:hover {
+	transform: translateY(-10px);
+}
+
+.hover-effect:active {
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자를 줄여 눌린 효과 제공 */
+	transform: translateY(4px); /* 버튼을 아래로 약간 이동시켜 눌린 듯한 느낌을 줍니다 */
+}
+
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:600,700';
+
+
+/* CODE TABLE */
+
+* {font-family: 'Open Sans', sans-serif;}
+
+.rwd-table {
+	margin: auto;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.rwd-table tr:first-child {
+	border-top: none;
+}
+
+.rwd-table thead th {
+	background: #04408a;
+	color: #fff;
+}
+
+.rwd-table tbody tr {
+	transition: background-color 0.3s ease;
+}
+
+.rwd-table tbody tr:hover {
+	background-color: #e4eefb;
+}
+
+.rwd-table tr {
+	border-top: 1px solid #eff0f0;
+	border-bottom: 1px solid #eff0f0;
+	background-color: #f5f9fe;
+}
+
+.rwd-table tr:nth-child(odd) {
+	background-color: #ebf2fd;
+}
+
+.rwd-table th {
+	display: none;
+}
+
+.rwd-table td {
+	display: block;
+}
+
+.rwd-table td:first-child {
+	margin-top: .5em;
+}
+
+.rwd-table td:last-child {
+	margin-bottom: .5em;
+}
+
+.rwd-table td:before {
+	content: attr(data-th) ": ";
+	font-weight: bold;
+	width: 120px;
+	display: inline-block;
+	color: #000;
+}
+
+.rwd-table th,
+.rwd-table td {
+	text-align: left;
+}
+
+.rwd-table {
+	color: #333;
+	border-radius: .4em;
+	overflow: hidden;
+}
+
+.rwd-table tr {
+	border-color: #f7f7f7;
+}
+
+.rwd-table th,
+.rwd-table td {
+	padding: .5em 1em;
+}
+
+@media screen and (max-width: 601px) {
+	.rwd-table tr:nth-child(2) {
+		border-top: none;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.rwd-table tr:hover {
+		background-color: #d8e7f3;
+	}
+	.rwd-table td:before {
+		display: none;
+	}
+	.rwd-table th,
+	.rwd-table td {
+		display: table-cell;
+		padding: .25em .5em;
+	}
+	.rwd-table th:first-child,
+	.rwd-table td:first-child {
+		padding-left: 0;
+	}
+	.rwd-table th:last-child,
+	.rwd-table td:last-child {
+		padding-right: 0;
+	}
+	.rwd-table th,
+	.rwd-table td {
+		padding: 1em !important;
+	}
+}
+
+
+
+/* Q&A TABLE */
+.qa-table {
+	margin: auto;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.qa-table tr:first-child {
+	border-top: none;
+}
+
+.qa-table thead th {
+	background: #04408a;
+	color: #fff;
+}
+
+.qa-table tbody tr {
+	transition: background-color 0.3s ease;
+}
+
+.qa-table tbody tr:hover {
+	background-color: #e4eefb;
+}
+
+.qa-table tr {
+	border-top: 1px solid #eff0f0;
+	border-bottom: 1px solid #eff0f0;
+	background-color: #f0f6fe;
+}
+
+.qa-table tr:nth-child(odd) {
+	background-color: #ebf2fd;
+}
+
+.qa-table th {
+	display: none;
+}
+
+.qa-table td {
+	display: block;
+}
+
+.qa-table td:first-child {
+	margin-top: .5em;
+}
+
+.qa-table td:last-child {
+	margin-bottom: .5em;
+}
+
+.qa-table td:before {
+	content: attr(data-th) ": ";
+	font-weight: bold;
+	width: 120px;
+	display: inline-block;
+	color: #000;
+}
+
+.qa-table th,
+.qa-table td {
+	text-align: left;
+}
+
+.qa-table {
+	color: #333;
+	border-radius: .4em;
+	overflow: hidden;
+}
+
+.qa-table tr {
+	border-color: #f7f7f7;
+}
+
+.qa-table th,
+.qa-table td {
+	padding: .5em 1em;
+}
+
+@media screen and (max-width: 601px) {
+	.qa-table tr:nth-child(2) {
+		border-top: none;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.qa-table tr:hover:not(:first-child) {
+		background-color: #d8e7f3;
+	}
+	.qa-table td:before {
+		display: none;
+	}
+	.qa-table th,
+	.qa-table td {
+		display: table-cell;
+		padding: .25em .5em;
+	}
+	.qa-table th:first-child,
+	.qa-table td:first-child {
+		padding-left: 0;
+	}
+	.qa-table th:last-child,
+	.qa-table td:last-child {
+		padding-right: 0;
+	}
+	.qa-table th,
+	.qa-table td {
+		padding: 1em !important;
+	}
+}
+
+/* 글 추천, 수정, 삭제 */
+.rec-btn1 {
+	font-size: 12px;
+	background-color: #00306b;
+	border-color: #00306b;
+	border-width: 2px;
+	color:white;
+}
+
+.mod-btn1, .del-btn1 {
+	font-size: 12px;
+	border-color: #00306b;
+	border-style: solid;
+	border-width: 2px;
+}
+
+.mod-btn1:hover, .del-btn1:hover {
+	background-color: #00306b;
+	color:white;
+}
+
+.rec-btn1:hover {
+	background-color: #80a8df;
+	color:white;
+}
+
+
+/* 댓글 추천, 수정, 삭제 */
+.rec-btn2 {
+	font-size: 12px;
+	background-color: white;
+	border-color: #9fb2fe;
+	border-width: 2px;
+	color:#9fb2fe;
+}
+
+.mod-btn2, .del-btn2 {
+	font-size: 12px;
+	border-color: white;
+	border-style: solid;
+	border-width: 2px;
+	color:black;
+}
+
+.mod-btn2:hover, .del-btn2:hover {
+	background-color: #9fb2fe;
+	color:white;
+}
+
+.rec-btn2:hover {
+	background-color: #9fb2fe;
+	color:white;
+}
+
+.user-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* 세로 방향으로 중앙 정렬 */
+	align-items: center; /* 가로 방향에서도 중앙 정렬을 원할 경우 추가 */
+	width: 150px; /* 고정 너비 */
+	flex-shrink: 0; /* 크기 감소 방지 */
+}
+
+.user-circle {
+	width: 100px;       /* 원의 너비 */
+	height: 100px;      /* 원의 높이 */
+	background-color: #b9c6fc; /* 원의 배경 색상 */
+	font-weight: bold;
+	border-radius: 50%; /* 원형 만들기 */
+	display: flex;      /* Flexbox 사용 */
+	justify-content: center; /* 가로 중앙 정렬 */
+	align-items: center; /* 세로 중앙 정렬 */
+	color: white;       /* 텍스트 색상 */
+	font-size: 16px;    /* 텍스트 크기 */
+	text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+/* THE END OF THE IMPORTANT STUFF */
+
+/* Basic Styling */
+body {
+	background: #cfd9f6;
+	background: -webkit-linear-gradient(to left, #cfd9f6 , #81b4f7);
+	background: linear-gradient(to left, #cfd9f6 , #81b4f7);
+}
+
+h1 {
+	text-align: center;
+	font-size: 2.4em;
+	color: #f2f2f2;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.container {
+	display: block;
+}
+
+h3 {
+	display: inline-block;
+	position: relative;
+	font-size: 1.5em;
+	color: #cecece;
+	text-align: center;
+}
+
+h3:before {
+	content: "\25C0";
+	position: absolute;
+	left: -50px;
+	-webkit-animation: leftRight 2s linear infinite;
+	animation: leftRight 2s linear infinite;
+}
+
+h3:after {
+	content: "\25b6";
+	position: absolute;
+	right: -50px;
+	-webkit-animation: leftRight 2s linear infinite reverse;
+	animation: leftRight 2s linear infinite reverse;
+}
+
+@-webkit-keyframes leftRight {
+	0%    { -webkit-transform: translateX(0)}
+	25%   { -webkit-transform: translateX(-10px)}
+	75%   { -webkit-transform: translateX(10px)}
+	100%  { -webkit-transform: translateX(0)}
+}
+
+@keyframes leftRight {
+	0%    { transform: translateX(0)}
+	25%   { transform: translateX(-10px)}
+	75%   { transform: translateX(10px)}
+	100%  { transform: translateX(0)}
+}
+
+/* Ensure textarea content is left-aligned */
+textarea {
+	text-align: left;
+}
+
+/* 페이징처리 스타일 적용 */
+.pagination .page-link {
+	background-color: #d2e1fe;
+	color: black;
+	padding: .5rem .75rem;
+	font-size: 1rem;
+}
+
+.pagination .page-item.active .page-link {
+	background-color: #396bcf;
+	color: white;
+	font-weight: bold;
+}
+
+.pagination .page-item.disabled .page-link {
+	color: dimgrey; /* 비활성 페이지 글자색 */
+	background-color: #d2e1fe;
+}
+
+.pagination .page-link:hover {
+	background-color: #e2e6ea; /* 호버 시 배경색 변경 */
+	font-weight: bold;
+}
+
+
+/* 마이페이지 UI 수정 */
+.input-group {
+	display: flex;
+	align-items: center;
+}
+
+.input-group .inp-form-control {
+	flex: 1;
+}
+
+/* 탭 링크 기본 스타일 */
+.nav-item .custom-nav-link {
+	padding: 10px 15px;
+	border-radius: 5px;
+}
+
+/* 활성 탭 링크 스타일 */
+.nav-item .custom-nav-link.active {
+	color: #fff;
+	background-color: #b0cafc;
+	border: 1px solid #b0cafc;
+	font-weight: bold;
+	border-bottom-style: none;
+}
+
+/* 탭 내용 영역 공통 스타일 */
+.tab-pane {
+	background-color: #cedffc;
+	padding: 20px;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	border-radius: 8px;
+	margin-top: 3px;
+}
+
+/* 리스트 그룹 아이템 공통 스타일 */
+.list-group-item {
+	background-color: #ffffff;
+	margin-bottom: 10px;
+	border: 1px solid #dddddd;
+	border-radius: 8px;
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* 링크 공통 스타일 */
+.list-group-item a {
+	color: #09337a;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/* 날짜 공통 스타일 */
+.list-group-item span {
+	float: right;
+	color: #666666;
+}
+
+/* 호버 효과 공통 스타일 */
+.list-group-item:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.content-flex {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flex-item {
+	flex: 1;
+	text-align: left;
+	padding-right: 10px;
+}
+
+.com-span {
+	font-weight: bold;
+}
+
+.date-span {
+	text-align: right;
+}

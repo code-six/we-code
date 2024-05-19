@@ -1,0 +1,13 @@
+<div th:fragment="loginNavFragment" class="btn-group" role="group" aria-label="Basic example"
+     style="text-align: right; display: block; margin-right: 15px; padding-bottom: 5px; padding-top: 5px;">
+    <!-- 로그인하지 않은 상태 -->
+    <div th:if="${#authorization.expression('isAnonymous()')}">
+        <a type="button" class="btn btn-secondary custom-btn-2" th:href="@{/user/login}">로그인</a>
+        <a type="button" class="btn btn-secondary custom-btn-2" th:href="@{/user/signup}">회원가입</a>
+    </div>
+    <!-- 로그인한 상태 -->
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <a type="button" class="btn btn-secondary custom-btn-2" th:href="@{/user/mypage}">마이페이지</a>
+        <a type="button" class="btn btn-secondary custom-btn-2" th:href="@{/user/logout}">로그아웃</a>
+    </div>
+</div>

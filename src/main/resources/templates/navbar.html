@@ -1,0 +1,18 @@
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light">
+	<div class="container-fluid d-flex justify-content-center align-items-center position-relative">
+
+		<a class="nav-link text-center" th:href="@{/post/list}" th:classappend="${currentURI == '/post/list' ? 'active-link' : ''}" style="padding: 10px 20px; font-size: 18px; position: absolute; left: 25%; margin-right: 50px;">
+			<button style="width: 100px; height: 80px; border-radius: 50%; font-size: 20px; font-weight:bold; background-color: white; color: #04408a; border: none; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" class="hover-effect">CODE</button>
+		</a>
+
+		<a class="navbar-brand" href="/" style="position: absolute; left: 50%; transform: translateX(-50%);">
+			<img src="/icons/we-code.png" alt="We Code Logo" style="height: 100px;">
+		</a>
+
+		<a class="nav-link text-center" th:href="@{/question/list}" th:classappend="${currentURI == '/question/list' ? 'active-link' : ''}" style="padding: 10px 20px; font-size: 18px; position: absolute; right: 25%; margin-left: 50px;">
+			<button style="width: 100px; height: 80px; border-radius: 50%; font-size: 20px; font-weight:bold; background-color: white; color: #04408a; border: none; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;" class="hover-effect">Q&A</button>
+		</a>
+
+	</div>
+	<div style="height: 15px;"></div>
+</nav>

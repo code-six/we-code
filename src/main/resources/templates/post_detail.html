@@ -1,0 +1,138 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Post Detail</title>
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/dracula.min.css">
+    <style>
+        .CodeMirror {
+            border: 1px solid #eee;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container my-3">
+    <!-- 게시글 -->
+    <h2 class="border-bottom py-2" th:text="${post.subject}"></h2>
+    <div style="display: flex; justify-content: flex-end; font-size: 14px;">
+        <span th:if="${post.author != null}" th:text="${'작성자 ' + post.author.username}" style="margin-right: 20px;"></span>
+        <span th:if="${post.author != null}" th:text="${'작성일 ' + #temporals.format(post.createDate, 'yyyy-MM-dd HH:mm')}" style="margin-right: 20px;"></span>
+        <span th:if="${post.modifyDate != null}" th:text="${'수정일 ' + #temporals.format(post.modifyDate, 'yyyy-MM-dd HH:mm')}"></span>
+    </div>
+    <div class="card my-3 border-3" style="border-color: #bbcff1">
+        <div class="card-body">
+            <div class="card-text">
+                <textarea id="code-content" style="display:none;" th:text="${post.content}"></textarea>
+            </div>
+
+
+            <!-- 버튼 그룹 -->
+            <div class="my-3" style="display: flex; justify-content: flex-end; gap: 5px;">
+                <a href="javascript:void(0);" class="recommend btn btn-sm rec-btn1" style="border-radius: 5px;"
+                   th:data-uri="@{|/post/vote/${post.id}|}">
+                    추천
+                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(post.voter)}"></span>
+                </a>
+                <a th:href="@{|/post/modify/${post.id}|}" class="btn btn-sm mod-btn1"
+                   sec:authorize="isAuthenticated()" style="border-radius: 5px;"
+                   th:if="${post.author != null and #authentication.getPrincipal().getUsername() == post.author.username}"
+                   th:text="수정"></a>
+                <a href="javascript:void(0);" th:data-uri="@{|/post/delete/${post.id}|}" style="border-radius: 5px;"
+                   class="delete btn btn-sm del-btn1" sec:authorize="isAuthenticated()"
+                   th:if="${post.author != null and #authentication.getPrincipal().getUsername() == post.author.username}"
+                   th:text="삭제"></a>
+            </div>
+        </div>
+    </div>
+    <div style="height: 10px;"></div>
+    <!-- 댓글의 갯수 표시 -->
+    <h5 class="border-bottom my-3 py-2" style="color: #001a3c" th:text="|${#lists.size(post.commentList)}개의 댓글이 있습니다.|"></h5>
+    <!-- 댓글 반복 시작 -->
+    <div class="card my-3" style="border-color: #b9c6fc; border-width:2px;" th:each="comment : ${post.commentList}">
+        <a th:id="|comment_${comment.id}|"></a>
+        <div class="card-body">
+            <div class="d-flex flex-row">
+                <div class="user-container" style="margin-top: 20px;">
+                    <div class="user-circle" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                        <img th:if="${comment.author != null}" th:src="@{${comment.author.profileImage}}"
+                             onerror="this.alt='${comment.author.username}'; this.src='https://placehold.co/50x50?text=${comment.author.username}';"
+                             style="width: 100%; height: 100%;" />
+                    </div>
+                    <div class="user-date" style="margin-top:15px;">
+                        <div style="font-size: 11px;" th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}+' 작성'"></div>
+                        <div style="font-size: 11px;" th:if="${comment.modifyDate != null}" th:text="${#temporals.format(comment.modifyDate, 'yyyy-MM-dd HH:mm')}+' 수정'"></div>
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="card-text" th:utext="${@commonUtil.markdown(comment.content)}" style="margin-left: 25px;"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="mb-3" style="display: flex; justify-content: flex-end; gap: 5px; margin-right:10px;">
+            <a href="javascript:void(0);" class="recommend btn btn-sm rec-btn2" style="border-radius: 5px; font-size: 11px;"
+               th:data-uri="@{|/comment/vote/${comment.id}|}">
+                추천
+                <span class="badge rounded-pill bg-success" style="background-color: #93d9ab" th:text="${#lists.size(comment.voter)}"></span>
+            </a>
+            <a th:href="@{|/comment/modify/${comment.id}|}" class="btn btn-sm mod-btn2" style="border-radius: 5px; font-size: 11px;"
+               sec:authorize="isAuthenticated()"
+               th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
+               th:text="수정"></a>
+            <a href="javascript:void(0);" th:data-uri="@{|/comment/delete/${comment.id}|}" style="border-radius: 5px; font-size: 11px;"
+               class="delete btn btn-sm del-btn2" sec:authorize="isAuthenticated()"
+               th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
+               th:text="삭제"></a>
+        </div>
+    </div>
+    <!-- 댓글 반복 끝  -->
+    <!-- 댓글 작성 -->
+    <!-- 댓글(comment) 수정 및 삭제 시 발생했던 오류 해결 -->
+    <form th:action="@{|/comment/create/${post.id}|}" th:object="${commentForm}" method="post" class="my-3">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control"
+                  rows="5"></textarea>
+        <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="5"></textarea>
+        <div style="display: flex; justify-content: flex-end;">
+            <input type="submit" value="댓글 등록" class="btn btn-primary my-2" style="border-radius: 10px; background-color: #04182e;">
+        </div>
+    </form>
+</div>
+<script layout:fragment="script" type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function (element) {
+        element.addEventListener('click', function () {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+    const recommend_elements = document.getElementsByClassName("recommend");
+    Array.from(recommend_elements).forEach(function (element) {
+        element.addEventListener('click', function () {
+            if (confirm("정말로 추천하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var codeContent = document.getElementById('code-content');
+        CodeMirror.fromTextArea(codeContent, {
+            lineNumbers: true,
+            mode: 'javascript',
+            readOnly: true,
+            theme: 'dracula'
+        });
+    });
+</script>
+</body>
+</html>
+
+

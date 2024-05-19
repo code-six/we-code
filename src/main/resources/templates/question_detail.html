@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3" style="width: 80%">
+	<!-- 질문 -->
+	<!-- 질문 제목 -->
+	<h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
+	<div style="display: flex; justify-content: flex-end; font-size: 14px;">
+		<span th:if="${question.author != null}" th:text="${'작성자 ' + question.author.username}" style="margin-right: 20px;"></span>
+		<span th:if="${question.author != null}" th:text="${'작성일 ' + #temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}" style="margin-right: 20px;"></span>
+		<span th:if="${question.modifyDate != null}" th:text="${'수정일 ' + #temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></span>
+	</div>
+	<div class="card my-3 border-3" style="border-color: #bbcff1">
+		<div class="card-body">
+			<!-- 질문 내용 -->
+			<div class="card-text" style="font-size: 18px; min-height: 150px;" th:utext="${@commonUtil.markdown(question.content)}"></div>
+
+			<!-- 버튼 그룹 -->
+			<div class="m-3" style="display: flex; justify-content: flex-end; gap: 5px;">
+				<a href="javascript:void(0);" class="recommend btn btn-sm rec-btn1"
+					th:data-uri="@{|/question/vote/${question.id}|}" style="font-size: 12px; border-radius: 5px;">
+					추천
+					<span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>
+				</a>
+				<a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm mod-btn1"
+					sec:authorize="isAuthenticated()"
+					th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}" style="font-size: 12px; border-radius: 5px;"
+					th:text="수정"></a>
+				<a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}" style="font-size: 12px; border-radius: 5px;"
+					class="delete btn btn-sm del-btn1" sec:authorize="isAuthenticated()"
+					th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+					th:text="삭제"></a>
+			</div>
+		</div>
+	</div>
+	<div style="height: 10px;"></div>
+	<!-- 답변의 갯수 표시 -->
+	<h5 class="border-bottom my-3 py-2" style="color: #001a3c" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+	<!-- 답변 반복 시작 -->
+	<div class="card my-3" style="border-color: #b9c6fc; border-width:2px;" th:each="answer : ${question.answerList}">
+		<a th:id="|answer_${answer.id}|"></a>
+		<div class="card-body">
+			<div class="d-flex flex-row">
+				<div class="user-container" style="margin-top: 20px;">
+					<div class="user-circle" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+						<img th:if="${answer.author != null}" th:src="@{${answer.author.profileImage}}"
+							 onerror="this.alt='${answer.author.username}'; this.src='https://placehold.co/50x50?text=${answer.author.username}';"
+							 style="width: 100%; height: 100%;" />
+					</div>
+					<div class="user-date" style="margin-top:15px;">
+						<div style="font-size: 11px;" th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}+' 작성'"></div>
+						<div style="font-size: 11px;" th:if="${answer.modifyDate != null}" th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm')}+' 수정'"></div>
+					</div>
+				</div>
+				<div class="card-text" th:utext="${@commonUtil.markdown(answer.content)}" style="margin-left: 25px;"></div>
+			</div>
+			<div class="my-3" style="display: flex; justify-content: flex-end; gap: 5px; margin-right:10px;">
+				<a href="javascript:void(0);" class="recommend btn btn-sm rec-btn2" style="border-radius: 5px; font-size: 11px;"
+				   th:data-uri="@{|/answer/vote/${answer.id}|}">
+					추천
+					<span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>
+				</a>
+				<a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm mod-btn2" style="border-radius: 5px; font-size: 11px;"
+				   sec:authorize="isAuthenticated()"
+				   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+				   th:text="수정"></a>
+				<a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
+				   class="delete btn btn-sm del-btn2" sec:authorize="isAuthenticated()" style="border-radius: 5px; font-size: 11px;"
+				   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+				   th:text="삭제"></a>
+			</div>
+
+		</div>
+	</div>
+	<!-- 답변 반복 끝  -->
+	<!-- 답변 작성 -->
+	<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
+		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+		<textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control"
+			rows="5"></textarea>
+		<textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="5"></textarea>
+		<div style="display: flex; justify-content: flex-end;">
+			<input type="submit" value="답변 등록" class="btn btn-primary my-2" style="border-radius: 10px; background-color: #04182e;">
+		</div>
+	</form>
+</div>
+<script layout:fragment="script" type='text/javascript'>
+	const delete_elements = document.getElementsByClassName("delete");
+	Array.from(delete_elements).forEach(function (element) {
+		element.addEventListener('click', function () {
+			if (confirm("정말로 삭제하시겠습니까?")) {
+				location.href = this.dataset.uri;
+			};
+		});
+	});
+	const recommend_elements = document.getElementsByClassName("recommend");
+	Array.from(recommend_elements).forEach(function (element) {
+		element.addEventListener('click', function () {
+			if (confirm("정말로 추천하시겠습니까?")) {
+				location.href = this.dataset.uri;
+			};
+		});
+	});
+</script>
+
+</html>

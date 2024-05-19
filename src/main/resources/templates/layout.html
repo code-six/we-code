@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+	<!-- sbb CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link href="/css/style.css" rel="stylesheet">
+
+	<!-- CodeMirror CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/dracula.min.css">
+	<style>
+		.CodeMirror {
+			border: 1px solid #eee;
+			height: auto;
+			min-height: 300px;
+		}
+	</style>
+
+	<script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', (event) => {
+			var textareas2 = document.querySelectorAll('textarea[ck-editor]');
+			textareas2.forEach(function(textarea) {
+				ClassicEditor
+						.create( document.querySelector( '#editor' ), {
+							// CKEditor 설정 옵션
+						} )
+						.catch( error => {
+							console.error( error );
+						});
+			});
+		});
+	</script>
+
+	<title>We Code</title>
+</head>
+
+<body>
+<!-- 네비게이션바 -->
+<div th:replace="~{login_nav :: loginNavFragment}"></div>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div style="height: 20px"></div>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<th:block layout:fragment="content"></th:block>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+<!-- 자바스크립트 Start -->
+<script th:src="@{/js/custom.js}"></script>
+<!-- 자바스크립트 End -->
+<!-- Bootstrap JS -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/selection/active-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/hint/show-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/hint/javascript-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/search/search.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/search/searchcursor.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/search/jump-to-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/dialog/dialog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/search/match-highlighter.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/hint/show-hint.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/dialog/dialog.min.css">
+
+<th:block layout:fragment="script"></th:block>
+
+<!-- CodeMirror -->
+<script>
+	document.addEventListener('DOMContentLoaded', (event) => {
+		var textareas = document.querySelectorAll('textarea[data-codemirror]');
+		textareas.forEach(function(textarea) {
+			var editor = CodeMirror.fromTextArea(textarea, {
+				lineNumbers: true,
+				mode: 'javascript',
+				matchBrackets: true,
+				styleActiveLine: true,
+				theme: 'dracula',	// dracula 테마 적용
+				extraKeys: {"Ctrl-Space": "autocomplete"},	// Ctrl-Space 키를 누르면 자동 완성이 되도록 설정
+				highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},
+				viewportMargin: Infinity,
+				lineWrapping: true,
+				firstLineNumber: 1
+			});
+
+			// 기존에 한 줄이었던 코드 입력창의 크기를 대략 15줄 정도의 크기로 확대
+			editor.setSize(null, "300px");
+
+
+			CodeMirror.commands.find = function(cm) {
+				CodeMirror.commands.findPersistent(cm);
+			};
+
+			CodeMirror.commands.replace = function(cm) {
+				CodeMirror.commands.replacePersistent(cm);
+			};
+
+			// Ctrl-F 및 Ctrl-R 단축키를 사용하여 검색 및 단어 교체 가능하도록 설정
+			editor.addKeyMap({
+				'Ctrl-F': 'findPersistent',
+				'Ctrl-R': 'replacePersistent'
+			});
+		});
+	});
+</script>
+</body>
+</html>
